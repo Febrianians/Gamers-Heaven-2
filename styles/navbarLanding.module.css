@@ -1,0 +1,16 @@
+.navbar {
+  opacity: 0.5;
+}
+
+.navbrand {
+  color: white !important;
+  font-weight: 700 !important;
+}
+
+.navitem {
+  font-weight: 600;
+}
+
+.navlink {
+  color: rgba(255,255,255,.55) !important;
+}
