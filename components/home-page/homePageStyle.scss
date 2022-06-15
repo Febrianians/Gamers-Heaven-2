@@ -13,7 +13,7 @@
     height: 80%;
     color: white;
 
-    // .bodySection {   
+    .bodySection {   
     //   width: 75%;
     //   max-height: 600px;
     //   border: 2px solid black;
@@ -22,11 +22,11 @@
     //   position: relative;
     //   top: 300px;
     //   bottom: 20px;
-    //   display: flex;
-    //   justify-content: space-around;
+      display: flex;
+      justify-content: center;
     //   box-sizing: border-box;
     //   overflow: auto
-    // }
+    }
   }
 
 }
