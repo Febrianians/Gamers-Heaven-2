@@ -1,18 +1,20 @@
-import Header from '../header'
-import ProfilePageCard from './profile-page-card'
-
-export default function ProfilePageComponent() {
+import Header from "../header";
+import UpdateFormComponent from "./updateForm";
+export default function ProfilePageUpdateComponent(){
     return (
         <>
-        <div className="profilePage">
-            <Header title='Profile Page'/>
-             <div className="wrapper">
+            <div className="updateProfile">
+            <Header title="Update Profile"/>
+            <div className="form">
+                <div className='formSection'>
+                    <UpdateFormComponent/>
+                </div>
+                <div className="profilePageUpdate">
                 <div className="card">
                     <div className="cardTitle">
                         <div className="profilePicture">
                             <div className="image"></div>
-                        </div>
-                       
+                        </div>  
                     </div>
                     <div className="cardContent">
                         <div className="username">
@@ -32,8 +34,9 @@ export default function ProfilePageComponent() {
                         </div>
                     </div>
                 </div>
-                </div>
+            </div>    
             </div>
+        </div>
         </>
     )
 }

@@ -1,12 +1,7 @@
-import Header from '../header'
-import ProfilePageCard from './profile-page-card'
-
-export default function ProfilePageComponent() {
+export default function ProfilePageCard() {
     return (
         <>
-        <div className="profilePage">
-            <Header title='Profile Page'/>
-             <div className="wrapper">
+        <div className="wrapper">
                 <div className="card">
                     <div className="cardTitle">
                         <div className="profilePicture">
@@ -33,7 +28,6 @@ export default function ProfilePageComponent() {
                     </div>
                 </div>
                 </div>
-            </div>
         </>
     )
 }
