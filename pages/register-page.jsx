@@ -2,6 +2,7 @@ import { useState } from "react";
 import Header from "../components/header"
 import { auth, db } from "../services/firebase";
 import { ref, set } from "firebase/database";
+import { useRouter  } from 'next/router'
 
 import { createUserWithEmailAndPassword } from "firebase/auth";
 
@@ -13,12 +14,15 @@ export default function RegisterPage() {
   const [bio, setBio] = useState("");
   const [city, setCity] = useState("");
   const [socialMediaUrl, setSocialMediaUrl] = useState("");
+  const router = useRouter()
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password);
       const user = res.user;
       if (user) alert("Register Success");
+      router.push('/login-page')
+
       set(ref(db, `users/${user.uid}`), {
         email: email,
         username: username,
