@@ -3,10 +3,14 @@ import { useEffect } from 'react'
 import { auth, db } from '../services/firebase'
 import { ref, get, child } from "firebase/database";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { useRouter } from 'next/router'
+
 
 export default function Header(props) {
 
     const [user, loading] = useAuthState(auth);
+    const router = useRouter()
+
 
     function fetchUserdata() {
         get(child(ref(db), `users/${user.uid}`))
@@ -28,6 +32,14 @@ export default function Header(props) {
         fetchUserdata();
       }, []);
 
+      const logoutBtn = (e) => {
+        e.preventDefault();
+        auth.signOut();
+        console.log('User signed out!');
+        router.push('/')
+
+      }
+      
 
     return(
         <div>
@@ -71,13 +83,13 @@ export default function Header(props) {
                     </Nav>
                     <Nav>
                     <NavItem className='navitem'>
-                        <NavLink className='navlink' href='/register-page'>
-                        REGISTER
+                        <NavLink className='navlink' href='/profile-page'>
+                        {user?.email}
                         </NavLink>
                     </NavItem>
                     <NavItem className='navitem'>
-                        <NavLink className='navlink' href="/login-page">
-                        LOGIN
+                        <NavLink style={{cursor: "pointer"}} onClick={logoutBtn} className='navlink'>
+                        LOGOUT
                         </NavLink>
                     </NavItem>
         

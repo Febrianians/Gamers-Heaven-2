@@ -1,27 +1,36 @@
-import React, { useState, useEffect } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import Header from "../components/header"
 import { auth, db } from '../services/firebase'
 import { signInWithEmailAndPassword } from 'firebase/auth';
+import { useRouter } from 'next/router'
+
 
 export default function LoginPage(props) {
     // let navigate = useNavigate()
     const {handleProps} = props
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const router = useRouter()
+
+    
+
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
             console.log(email,password)     
             const response = await signInWithEmailAndPassword(auth, email, password);
-                console.log(response);
+                console.log(response, '==> response dari login');
             if (response) {
                 alert('Login Success');
+                console.log(response.UserCredentialImpl, '==> response success');
                 // <Link to={{
                 //     pathname: "/",
                 //     state: response // your data array of objects
                 // }}
                 // />
-                // navigate('/home') 
+                // navigate('/home')
+                router.push('/home-page')
+          
             }
                 
                 } catch (err) {
