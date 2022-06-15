@@ -108,9 +108,25 @@
   margin-left: 0.5rem;
 }
 
+
+.profilePage{
+  display: flex;
+}
+
+.sidebar{
+  display: inherit;
+  flex: 2;
+}
+
+.content{
+  display: inherit;
+  flex: 5;
+}
+
 @media (max-width: 600px) {
   .grid {
     width: 100%;
     flex-direction: column;
   }
 }
+

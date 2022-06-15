@@ -1,0 +1,58 @@
+*, h1, h2, h3, h4, h5, h6{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.profilePage{
+    height: 100vh;
+    background-image: url('../../public//assets//img//requirements.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.wrapper {
+    width: 100%;
+    height: max-content;
+    display: flex;
+    justify-content: center;
+    
+    
+    .card{
+        margin-top: 3%;
+        width: 400px;
+        height: 550px;
+        text-align: center;
+        background: rgba(217, 108, 6, 0.6);
+        color: white;
+        display: flex;
+        flex-direction: column;
+        border-radius: 8px;
+        border: 2px solid white;
+        .profilePicture{
+            flex: 1;
+            background-image: url('../../public//assets/img/person-1.jpeg');
+            width: 175px;
+            height: 175px;
+            background-size: cover;
+            justify-content: center;
+            border-radius: 50%;
+            margin: auto;
+            border: 1px solid white;
+        }
+        .cardTitle{
+            flex: 1;
+            padding-top: 40px;
+            h3{
+                margin: 0;
+                padding-top: 20px;
+            }
+        }
+        .cardContent{
+            flex: 2;
+            .username, .email, .gamePlayed, .gamePlayed{
+                padding: 10px 0;
+            }
+        }
+    }
+}
