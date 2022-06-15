@@ -1,5 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.css'
 import '../components/profile-page/profilePageStyle.scss'
+import '../components/landing-page/landingPageStyle.scss'
+import '../components/headerStyle.scss'
 
 function MyApp({ Component, pageProps }) {
   return <Component {...pageProps} />
