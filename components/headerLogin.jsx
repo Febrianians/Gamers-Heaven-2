@@ -1,5 +1,5 @@
 import { Navbar, NavbarBrand, NavbarToggler, Collapse, Nav, NavItem, NavLink } from 'reactstrap';
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { auth, db } from '../services/firebase'
 import { ref, get, child } from "firebase/database";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -18,6 +18,7 @@ export default function Header(props) {
         console.log(username, '==> username header login');
         console.log(totalScore, '==> totalScore header login');
     }, [])
+
 
       const logoutBtn = (e) => {
         e.preventDefault();
@@ -52,7 +53,7 @@ export default function Header(props) {
                         </NavLink>
                     </NavItem>
                     <NavItem className='navitem'>
-                        <NavLink href="/game-list-page">
+                        <NavLink href="/game-list">
                         LIST GAME
                         </NavLink>
                     </NavItem>
