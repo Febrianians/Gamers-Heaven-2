@@ -3,6 +3,10 @@ import Header from "../components/header"
 import { auth, db } from '../services/firebase'
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useRouter } from 'next/router'
+import { setToken } from '../redux/actions';
+import { useDispatch } from 'react-redux'
+import { useAuthState } from "react-firebase-hooks/auth";
+
 
 
 export default function LoginPage(props) {
@@ -11,6 +15,8 @@ export default function LoginPage(props) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const router = useRouter()
+    const dispatch = useDispatch()
+    const [user, loading] = useAuthState(auth)
 
     
 
@@ -21,8 +27,8 @@ export default function LoginPage(props) {
             const response = await signInWithEmailAndPassword(auth, email, password);
                 console.log(response, '==> response dari login');
             if (response) {
-                alert('Login Success');
-                console.log(response.UserCredentialImpl, '==> response success');
+                // alert('Login Success');
+                console.log(user.uid, '==> response success');
                 // <Link to={{
                 //     pathname: "/",
                 //     state: response // your data array of objects
@@ -30,7 +36,8 @@ export default function LoginPage(props) {
                 // />
                 // navigate('/home')
                 router.push('/home-page')
-          
+                dispatch(setToken(user.uid))
+                
             }
                 
                 } catch (err) {

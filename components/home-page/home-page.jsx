@@ -1,8 +1,9 @@
 import Header from "../headerLogin"
 import { useEffect } from 'react'
 import { auth, db } from "../../services/firebase";
-import { ref, get, child } from "firebase/database";
+import { getDatabase, ref, get, child, onValue } from "firebase/database";
 import { useAuthState } from "react-firebase-hooks/auth";
+
 
 
 export default function HomePageComponent() {
@@ -11,10 +12,12 @@ export default function HomePageComponent() {
 
 
     function fetchUserdata() {
+          
+
         get(child(ref(db), `users/${user.uid}`))
           .then((snapshot) => {
             if (snapshot.exists()) {
-              console.log(snapshot.val());
+              console.log(snapshot.val(), '==> user di home-page');
               setUserData(snapshot.val());
             } else {
               console.log("No data available");
@@ -37,7 +40,7 @@ export default function HomePageComponent() {
       <Header title='Home Page' />
         <div className="wrapper">
           <div className='bodySection'>
-            <h1>Welcome to the Home Page</h1>
+            <h1>Welcome {user?.email} the Home Page</h1>
           </div>
         </div>
       </div>    
