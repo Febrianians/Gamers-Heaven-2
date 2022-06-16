@@ -4,37 +4,24 @@ import { auth, db } from '../services/firebase'
 import { ref, get, child } from "firebase/database";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useRouter } from 'next/router'
+import { useSelector } from 'react-redux'
 
 
 export default function Header(props) {
 
     const [user, loading] = useAuthState(auth);
     const router = useRouter()
+    const username = useSelector(state => state.username)
+    const totalScore = useSelector(state => state.totalScore)
 
-
-    function fetchUserdata() {
-        get(child(ref(db), `users/${user.uid}`))
-          .then((snapshot) => {
-            if (snapshot.exists()) {
-              console.log(snapshot.val());
-              setUserData(snapshot.val());
-            } else {
-              console.log("No data available");
-            }
-          })
-          .catch((error) => {
-            console.error(error);
-          });
-      }
-    
-      useEffect(() => {
-        if (loading) return;
-        fetchUserdata();
-      }, []);
+    useEffect(() => {
+        console.log(username, '==> username header login');
+        console.log(totalScore, '==> totalScore header login');
+    }, [])
 
       const logoutBtn = (e) => {
         e.preventDefault();
-        auth.signOut();
+        localStorage.removeItem('firebase:host:challenge-chapter10-default-rtdb.asia-southeast1.firebasedatabase.app')
         console.log('User signed out!');
         router.push('/')
 
@@ -84,7 +71,7 @@ export default function Header(props) {
                     <Nav>
                     <NavItem className='navitem'>
                         <NavLink className='navlink' href='/profile-page'>
-                        {user?.email}
+                        {username}
                         </NavLink>
                     </NavItem>
                     <NavItem className='navitem'>

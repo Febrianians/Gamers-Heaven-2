@@ -4,9 +4,17 @@ import '../components/landing-page/landingPageStyle.scss'
 import '../components/headerStyle.scss'
 import '../components/home-page/homePageStyle.scss'
 import '../components/profile-page-update/profilePageUpdateStyle.scss'
+import { nextStore, store } from '../redux/index'
+import { Provider } from 'react-redux'
 
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+  return(
+    <>
+      <Provider store={store}>
+        <Component {...pageProps} />
+      </Provider>
+    </>
+  ) 
 }
 
-export default MyApp
+export default nextStore.withRedux(MyApp)
