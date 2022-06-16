@@ -1,4 +1,5 @@
 import Header from "../headerLogin"
+import { Button } from 'reactstrap'
 import { useEffect } from 'react'
 import { auth, db } from "../../services/firebase";
 import { getDatabase, ref, get, child, onValue } from "firebase/database";
@@ -41,6 +42,12 @@ export default function HomePageComponent() {
         <div className="wrapper">
           <div className='bodySection'>
             <h1>Welcome {user?.email} the Home Page</h1>
+            <div>
+              <Button color="warning" size="lg" href='/played-dummy'>
+                PLAY NOW
+              </Button>
+            </div>
+
           </div>
         </div>
       </div>    
