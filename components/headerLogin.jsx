@@ -25,10 +25,7 @@ export default function Header(props) {
         localStorage.removeItem('firebase:host:challenge-chapter10-default-rtdb.asia-southeast1.firebasedatabase.app')
         console.log('User signed out!');
         router.push('/')
-
       }
-      
-
     return(
         <div>
             <Navbar

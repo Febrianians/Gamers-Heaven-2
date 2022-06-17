@@ -6,22 +6,52 @@
     height: 100vh;
     .form{
         display: flex;
+        justify-content: space-evenly;
     }
 
     .formSection{
         display: flex;
-        flex: 5;
-        padding: 50px 50px;
+        padding: 20px 10px 0 10px;
         color: white;
         font-weight: 600;
+        height: 600px;
 
         Form{
-
             border: 3px solid white;
-            padding: 10px;
             border-radius: 8px;
+            width: 500px;
+            height: max-content;
+            font-size: 12px;
+
+            .form{
+                margin: 0 !important;
+                padding: 0;
+            }
+            .infoHeader{
+                font-size: 18px;
+                padding: 15px 0;
+                text-align: center;
+                text-transform: uppercase;
+
+            }
+            input{
+                margin: 0;
+                padding: 0;
+            }
             .info{
-                padding-bottom: 30px;
+                margin: 0;
+                padding: 0 0 10px 0;
+                text-align: center;
+                font-size: 16px;
+                font-weight: 600;
+                text-transform:uppercase;
+            }
+            .row{
+                margin:0;
+                padding: 0;
+            }
+            .mb-3{
+                margin: 0;
             }
         }
     }
@@ -29,11 +59,9 @@
     .profilePageUpdate{
         padding: 15px;
         display: flex;
-        flex: 2;
         .card{
-        margin-top: 3%;
         width: 200px;
-        height: 550px;
+        height: max-content;
         text-align: center;
         background: rgba(217, 108, 6, 0.6);
         color: white;
