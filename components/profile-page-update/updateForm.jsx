@@ -23,14 +23,14 @@ const [socialmedia, setSocialMedia] = useState('')
 
   
   const updatePlayerProfile = (e) => {
-    e.preventDefault()
+
     const db = getDatabase();
   
 
 
   // A post entry (user Entry).
     const userData = {
-    // uid: user,
+
     email: email,
     username: username,
     bio: bio,
@@ -41,16 +41,28 @@ const [socialmedia, setSocialMedia] = useState('')
   // console.log(userData);
   
   // Get a key for a new Post.
-  // const newUserKey = push(child(ref(db), 'users')).key;
+  const newUserKey = push(child(ref(db), 'users')).key;
   
   // // Write the new post's data simultaneously in the posts list and the user's post list.
   const updates = {};
-  updates['/users/' ] = userData;
+
+  updates['/users/' + user.uid + '/' ] = userData;
+  // updates['/users/' +  user.uid ] = userData;
   
-  // console.log(updates);
     
-  return update(ref(db), updates);
-  // console.log(update);
+    
+  console.log(updates, '====> ini updates pake s');
+    
+  update(ref(db), updates)
+    
+  if (update) {
+    alert('Update Success')
+  }
+  else {
+    alert('Update Failed')
+    }
+  // console.log(update());
+    
 }
 
     return (
