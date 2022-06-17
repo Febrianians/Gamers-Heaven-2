@@ -26,7 +26,12 @@ const [socialmedia, setSocialMedia] = useState('')
 
     const db = getDatabase();
   
+    if (email === '' || bio === '' || username === '' || city === '' || socialmedia === '') {
+      alert('All field must be filled')
+      return false
+    } else {
 
+    }
 
   // A post entry (user Entry).
     const userData = {
@@ -37,11 +42,16 @@ const [socialmedia, setSocialMedia] = useState('')
     city: city,
     socialmediaUrl: socialmedia,
   };
+    console.log(userData, ' ======> user data')
+
+    
+    
   
+    
   // console.log(userData);
   
   // Get a key for a new Post.
-  const newUserKey = push(child(ref(db), 'users')).key;
+  // const newUserKey = push(child(ref(db), 'users')).key;
   
   // // Write the new post's data simultaneously in the posts list and the user's post list.
   const updates = {};
@@ -73,7 +83,7 @@ const [socialmedia, setSocialMedia] = useState('')
             </h2>
           <Label for="exampleEmail" sm={2}>Email</Label>
           <Col sm={10}>
-            <Input type="email" name="email" id="exampleEmail" placeholder="with a placeholder" onChange={(e)=> setEmail(e.target.value)} />
+            <Input type="email" name="email" id="exampleEmail" placeholder="New email..." onChange={(e)=> setEmail(e.target.value)} />
           </Col>
           </FormGroup>
           <FormGroup row>
