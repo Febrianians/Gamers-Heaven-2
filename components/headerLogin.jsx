@@ -12,7 +12,7 @@ export default function Header(props) {
     const [user, loading] = useAuthState(auth);
     const router = useRouter()
     const username = useSelector(state => state.username)
-    const totalScore = useSelector(state => state.totalScore)
+    const totalScore = useSelector(state => state.total_score)
 
     useEffect(() => {
         console.log(username, '==> username header login');
@@ -62,12 +62,22 @@ export default function Header(props) {
                         LIST DETAIL GAME
                         </NavLink>
                     </NavItem>
-                    <NavItem className='navitem'>
-                        <NavLink href="https://github.com/reactstrap/reactstrap">
-                        ABOUT ME
-                        </NavLink>
-                    </NavItem>
-        
+                    {
+                        username ? 
+                        <>
+                            <NavItem className='navitem'>
+                                <NavLink href="/profile-page">
+                                PROFILE
+                                </NavLink>
+                            </NavItem>
+                            <NavItem className='navitem'>
+                                <NavLink>
+                                TOTAL SCORE = {totalScore}
+                                </NavLink>
+                            </NavItem>
+                        </>
+                            : ''
+                    }
                     </Nav>
                     <Nav>
                     <NavItem className='navitem'>

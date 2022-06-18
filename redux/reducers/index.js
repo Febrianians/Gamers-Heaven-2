@@ -1,7 +1,7 @@
 
 const initialState = {
     username: '',
-    totalScore: null
+    total_score: null
 
 }
 
@@ -12,7 +12,7 @@ export default function reducers(state = initialState, action) {
             return { ...state, username:action.payload}
         case 'SET_SCORE':
             console.log(action.payload, '==> payload SCORE');
-            return { ...state, totalScore:action.payload}
+            return { ...state, total_score:action.payload}
         default:
         return state;
     }
