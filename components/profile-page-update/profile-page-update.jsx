@@ -1,5 +1,8 @@
-import Header from "../header";
+
+import Header from "../headerLogin";
 import UpdateFormComponent from "./updateForm";
+
+
 export default function ProfilePageUpdateComponent(){
     return (
         <>
