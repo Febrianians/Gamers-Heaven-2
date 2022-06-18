@@ -1,7 +1,40 @@
+import { useState, useEffect } from 'react';
 import Header from '../header'
-import ProfilePageCard from './profile-page-card'
+import {auth,db} from "../../services/firebase"
+import { ref, onValue, get, child, set } from 'firebase/database';
+import { useAuthState} from "react-firebase-hooks/auth"
+
+// const [userData, setUserData] = useState('')
+
 
 export default function ProfilePageComponent() {
+
+    function fetchUserData() {
+        let showData = ''
+        // const dbRef = ref(getDatabase());
+        get(child(ref(db), `users/${user.uid}`))
+          .then((snapshot) => {
+            if (snapshot.exists()) {
+              console.log(snapshot.val(), '==> snapshot');
+              setUserData(snapshot.val());
+              showData = snapshot.val()
+              console.log(showData, '==> ini show data');
+              console.log(setUserData, '==> set userdata');
+              console.log(userData, '==> ini userData');
+            } else {
+              console.log("No data available");
+            }
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }
+    
+      useEffect(() => {
+        fetchUserData()
+      },[])
+    
+
     return (
         <>
         <div className="profilePage">

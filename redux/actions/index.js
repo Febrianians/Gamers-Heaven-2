@@ -18,7 +18,7 @@ export function setToken(uid) {
                 })
                 dispatch({
                     type: 'SET_SCORE',
-                    payload: getUser.totalScore
+                    payload: getUser.total_score
                 })
                     } else {
                         console.log("No data available");
