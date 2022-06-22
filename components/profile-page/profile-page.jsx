@@ -3,23 +3,30 @@ import Header from '../header'
 import {auth,db} from "../../services/firebase"
 import { ref, onValue, get, child, set } from 'firebase/database';
 import { useAuthState} from "react-firebase-hooks/auth"
+// import { useDispatch } from 'react-redux'
 
 // const [userData, setUserData] = useState('')
 
 
 export default function ProfilePageComponent() {
 
-    function fetchUserData() {
+    const [user, loading] = useAuthState(auth);
+    const [userData, setUserData] = useState({})
+    // const dispatch = useDispatch()
+
+
+    const fetchUserdata = () => {
         let showData = ''
         // const dbRef = ref(getDatabase());
+        // dispatch(setToken(user.uid))
         get(child(ref(db), `users/${user.uid}`))
           .then((snapshot) => {
             if (snapshot.exists()) {
-              console.log(snapshot.val(), '==> snapshot');
+            //   console.log(snapshot.val(), '==> snapshot');
               setUserData(snapshot.val());
               showData = snapshot.val()
-              console.log(showData, '==> ini show data');
-              console.log(setUserData, '==> set userdata');
+            //   console.log(showData, '==> ini show data');
+            //   console.log(setUserData, '==> set userdata');
               console.log(userData, '==> ini userData');
             } else {
               console.log("No data available");
@@ -31,8 +38,9 @@ export default function ProfilePageComponent() {
       }
     
       useEffect(() => {
-        fetchUserData()
-      },[])
+        if (loading) return;
+        fetchUserdata();
+      }, []);
     
 
     return (
@@ -49,11 +57,11 @@ export default function ProfilePageComponent() {
                     </div>
                     <div className="cardContent">
                         <div className="username">
-                             <div><h3>User #1</h3></div>
+                             <div><h3>{userData.username}</h3></div>
                         </div>
                         <div className="email">
                             <h3>Email</h3>
-                            <h6>Test@mail.com</h6>
+                            <h6>{userData.email}</h6>
                         </div>
                         <div className="gamePlayed">
                             <div className="game">

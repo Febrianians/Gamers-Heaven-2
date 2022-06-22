@@ -5,6 +5,7 @@ import { ref, get, child } from "firebase/database";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useRouter } from 'next/router'
 import { useSelector } from 'react-redux'
+import Link from 'next/link';
 
 
 export default function Header(props) {
@@ -24,7 +25,7 @@ export default function Header(props) {
         e.preventDefault();
         localStorage.removeItem('firebase:host:challenge-chapter10-default-rtdb.asia-southeast1.firebasedatabase.app')
         console.log('User signed out!');
-        router.push('/')
+        // router.push('/')
       }
     return(
         <div>
@@ -45,47 +46,45 @@ export default function Header(props) {
                     navbar
                     >
                     <NavItem className='navitem'>
-                        <NavLink href="/landing-page">
+                        <Link href="/home-page">
                         HOME
-                        </NavLink>
+                        </Link>
                     </NavItem>
                     <NavItem className='navitem'>
-                        <NavLink href="/game-list">
+                        <Link href="/game-list">
                         LIST GAME
-                        </NavLink>
-                    </NavItem>
-                    <NavItem className='navitem'>
-                        <NavLink href="/game-detail-page">
-                        LIST DETAIL GAME
-                        </NavLink>
+                        </Link>
                     </NavItem>
                     {
                         username ? 
                         <>
                             <NavItem className='navitem'>
-                                <NavLink href="/profile-page">
+                                <Link href="/profile-page">
                                 PROFILE
-                                </NavLink>
+                                </Link>
                             </NavItem>
                             <NavItem className='navitem'>
-                                <NavLink>
                                 TOTAL SCORE = {totalScore}
-                                </NavLink>
                             </NavItem>
                         </>
                             : ''
                     }
+                    <NavItem className='navitem'>
+                        <Link href="/profile-page-update">
+                        PROFILE UPDATE
+                        </Link>
+                    </NavItem>
                     </Nav>
                     <Nav>
                     <NavItem className='navitem'>
-                        <NavLink className='navlink' href='/profile-page'>
+                        <Link className='navlink' href='/profile-page'>
                         {username}
-                        </NavLink>
+                        </Link>
                     </NavItem>
                     <NavItem className='navitem'>
-                        <NavLink style={{cursor: "pointer"}} onClick={logoutBtn} className='navlink'>
+                        <Link href="/" style={{cursor: "pointer"}} onClick={logoutBtn} className='navlink'>
                         LOGOUT
-                        </NavLink>
+                        </Link>
                     </NavItem>
         
                     </Nav>
