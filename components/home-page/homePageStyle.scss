@@ -7,6 +7,7 @@
 
   .wrapper {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     width: auto;
@@ -14,19 +15,28 @@
     color: white;
 
     .bodySection {   
-    //   width: 75%;
-    //   max-height: 600px;
-    //   border: 2px solid black;
-    //   background-color: black;
-    //   opacity: 0.7;
-    //   position: relative;
-    //   top: 300px;
-    //   bottom: 20px;
-      display: flex;
+      // width: 75%;
+      // max-height: 600px;
+      // border: 2px solid black;
+      // background-color: black;
+      // opacity: 0.7;
+      // position: relative;
+      // top: 300px;
+      // bottom: 20px;
       justify-content: center;
-    //   box-sizing: border-box;
-    //   overflow: auto
+      // box-sizing: border-box;
+      // overflow: auto
     }
+    .btn{
+        padding: 15px 40px;      
+        background-color: rgb(6, 89, 255);
+        color: white;
+        transition: all 0.1s;
+          &.btn:hover{
+              transform: scale(0.98);
+              background-color: rgb(3, 3, 220);
+          }      
+      }
   }
 
 }

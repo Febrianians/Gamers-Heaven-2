@@ -9,9 +9,9 @@ export function setToken(uid) {
         return (dispatch, getState) => {
             get(child(ref(db), `users/${uid}`))
             .then((snapshot) => {
+                if (snapshot.exists()) {
                     const getUser = snapshot.val()
-                    if (snapshot.exists()) {
-                        console.log(getUser.username,'==> snapshot masuk if');
+                    console.log(getUser, "==>> horee");
                 dispatch({
                     type: 'SET_USERNAME',
                     payload: getUser.username

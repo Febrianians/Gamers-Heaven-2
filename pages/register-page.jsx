@@ -26,7 +26,7 @@ export default function RegisterPage() {
       set(ref(db, `users/${user.uid}`), {
         email: email,
         username: username,
-        totalScore: totalScore,
+        total_score: totalScore,
         bio: bio,
         city: city,
         socialMediaUrl,
@@ -53,7 +53,7 @@ export default function RegisterPage() {
               placeholder="Enter email"
             />
             <small id="emailHelp" className="form-text text-muted">
-              We'll never share your email with anyone else.
+              We&apos;ll never share your email with anyone else.
             </small>
           </div>
           <div className="form-group text-left">
