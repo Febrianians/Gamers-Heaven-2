@@ -78,7 +78,7 @@ export default function Header(props) {
                     <Nav>
                     <NavItem className='navitem'>
                         <Link className='navlink' href='/profile-page'>
-                        {username}
+                        <a>{username}</a>
                         </Link>
                     </NavItem>
                     <NavItem className='navitem'>

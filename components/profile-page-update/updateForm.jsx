@@ -3,7 +3,7 @@ import { getDatabase, ref, child, push, update } from "firebase/database";
 import { useState } from 'react';
 import { auth, db } from "../../services/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
-
+ import { getAuth, updateEmail, updateProfile } from "firebase/auth";
 
 
 
@@ -20,7 +20,16 @@ const [username, setUsername] = useState('')
 const [city, setCity] = useState('')
 const [socialmedia, setSocialMedia] = useState('')
 
-
+  const updateUserEmail = () => {
+    const auth = getAuth();
+    updateEmail(auth.currentUser, email).then(() => {
+      alert("Email Updated")
+      // ...
+    }).catch((error) => {
+      // An error occurred
+      // ...
+    })
+  }
   
   const updatePlayerProfile = (e) => {
 
@@ -62,7 +71,7 @@ const [socialmedia, setSocialMedia] = useState('')
     
     
   console.log(updates, '====> ini updates pake s');
-    
+  updateUserEmail()  
   update(ref(db), updates)
     
   if (update) {
