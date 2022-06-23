@@ -5,11 +5,12 @@ import { ref, get, child } from "firebase/database";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useRouter } from 'next/router'
 import { useSelector } from 'react-redux'
+import { getAuth, signOut } from "firebase/auth";
 import Link from 'next/link';
 
 
 export default function Header(props) {
-
+    const [isOpen, setIsOpen] = useState(true)
     const [user, loading] = useAuthState(auth);
     const router = useRouter()
     const username = useSelector(state => state.username)
@@ -20,13 +21,21 @@ export default function Header(props) {
         console.log(totalScore, '==> totalScore header login');
     }, [])
 
+    function handleToggle () {
+        setIsOpen(!isOpen)
+    }    
 
-      const logoutBtn = (e) => {
+    const logoutBtn = (e) => {
         e.preventDefault();
-        localStorage.removeItem('firebase:host:challenge-chapter10-default-rtdb.asia-southeast1.firebasedatabase.app')
-        console.log('User signed out!');
-        // router.push('/')
-      }
+    const auth = getAuth();
+    signOut(auth).then(() => {
+    sessionStorage.removeItem('token')
+    }).catch((error) => {
+        console.log(error.message, '====> dari logout');
+    });
+    console.log('User signed out!');
+    // router.push('/')
+    }
     return(
         <div>
             <Navbar
@@ -35,59 +44,49 @@ export default function Header(props) {
             expand="md"
             fixed="off"
             className='navbar'
-            >
-                <NavbarBrand className='navbrand' href="/landing-page">
-                    {props.title}
-                </NavbarBrand>
-                <NavbarToggler onClick={function noRefCheck(){}} />
-                <Collapse navbar>
-                    <Nav
-                    className="me-auto"
+            >   <div className="navbrand">
+                    <Link href="/" >{props.title}</Link>
+                </div>
+                <NavbarToggler  onClick={handleToggle} />
+                <Collapse isOpen = {isOpen ? isOpen : ""} navbar>
+                    <Nav 
+                    className="ms-4 "
                     navbar
                     >
-                    <NavItem className='navitem'>
-                        <Link href="/home-page">
-                        HOME
+                    <NavItem className={router.pathname == "/home-page" ? "active" : "navitem"}>
+                        <Link href="/home-page" >
+                        <a className='text-link'>HOME</a>
                         </Link>
                     </NavItem>
-                    <NavItem className='navitem'>
+                    <NavItem className={router.pathname == "/game-list" ? "active" : "navitem"}>
                         <Link href="/game-list">
-                        LIST GAME
+                        <a className='text-link'>LIST GAME</a>
                         </Link>
                     </NavItem>
+                    </Nav>
                     {
                         username ? 
                         <>
+                         <Nav 
+                        >
                             <NavItem className='navitem'>
-                                <Link href="/profile-page">
-                                PROFILE
+                                <a className='text-link' style={{ cursor: 'pointer' }}>TOTAL SCORE = {totalScore ? totalScore : 0}</a>
+                            </NavItem>
+                       
+                            <NavItem className={router.pathname == "/profile-page" ? "active" : "navitem"}>
+                                <Link className='navlink' href='/profile-page'>
+                                <a className='text-link'>{username.toUpperCase()}</a>
                                 </Link>
                             </NavItem>
-                            <NavItem className='navitem'>
-                                TOTAL SCORE = {totalScore}
+                            <NavItem onClick={logoutBtn} className='navitem'>
+                                <Link href="/" style={{cursor: "pointer"}}  className='navlink'>
+                                <a className='text-link'>LOGOUT</a>
+                                </Link>
                             </NavItem>
+                        </Nav>
                         </>
                             : ''
-                    }
-                    <NavItem className='navitem'>
-                        <Link href="/profile-page-update">
-                        PROFILE UPDATE
-                        </Link>
-                    </NavItem>
-                    </Nav>
-                    <Nav>
-                    <NavItem className='navitem'>
-                        <Link className='navlink' href='/profile-page'>
-                        <a>{username}</a>
-                        </Link>
-                    </NavItem>
-                    <NavItem className='navitem'>
-                        <Link href="/" style={{cursor: "pointer"}} onClick={logoutBtn} className='navlink'>
-                        LOGOUT
-                        </Link>
-                    </NavItem>
-        
-                    </Nav>
+                        }
                 </Collapse>
             </Navbar>
         </div>

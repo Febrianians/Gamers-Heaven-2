@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
-import Header from '../header'
+import Header from '../headerLogin'
 import {auth,db} from "../../services/firebase"
 import { ref, onValue, get, child, set } from 'firebase/database';
-import { useAuthState} from "react-firebase-hooks/auth"
+import { useAuthState } from "react-firebase-hooks/auth"
+import { Button } from 'reactstrap';
+import Link from 'next/link';
 // import { useDispatch } from 'react-redux'
 
 // const [userData, setUserData] = useState('')
@@ -70,6 +72,16 @@ export default function ProfilePageComponent() {
                             <div className="playedGame">
                                 <h6>- Rock Paper Scissors : High Score (30pts)</h6>
                             </div>
+                        </div>
+                        <div className="bio">
+                          <h6>Biodata</h6>
+                          {userData.bio}
+                        </div>
+                        <div>
+                              <Link href="/profile-page-update">
+                                <button 
+                              className='btn'>UPDATE YOUR PROFILE</button>
+                              </Link>
                         </div>
                     </div>
                 </div>
