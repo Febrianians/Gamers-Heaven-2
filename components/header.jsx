@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import { auth, db } from '../services/firebase'
 import { ref, get, child } from "firebase/database";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { useRouter } from 'next/router';
 import Link from 'next/link';
 
 export default function Header(props) {
@@ -10,6 +11,7 @@ export default function Header(props) {
   const [user, loading] = useAuthState(auth)
   const [userData, setUserData] = useState({})
   const [isOpen, setIsOpen] = useState(true)
+  const router = useRouter()
 
   const handleNavbar = () => {
       setIsOpen(!isOpen)
@@ -56,8 +58,8 @@ export default function Header(props) {
                     className="mx-auto"
                     navbar
                     >
-                    <NavItem className='navitem'>
-                        <Link href="/landing-page">
+                    <NavItem className={router.pathname == "/" ? "active" : "navitem"}>
+                        <Link href="/">
                         <a className='text-link'>HOME</a>
                         </Link>
                     </NavItem>
@@ -75,12 +77,12 @@ export default function Header(props) {
                     <Nav
                     className="me-end"
                     navbar>
-                    <NavItem className='navitem'>
+                    <NavItem className={router.pathname == "/register-page" ? "active" : "navitem"}>
                         <Link className='navlink' href='/register-page'>
                         <a className='text-link'>REGISTER</a>
                         </Link>
                     </NavItem>
-                    <NavItem className='navitem'>
+                    <NavItem className={router.pathname == "/login-page" ? "active" : "navitem"}>
                         <Link className='navlink' href="/login-page">
                         <a className='text-link'>LOGIN</a>
                         </Link>

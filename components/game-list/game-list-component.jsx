@@ -56,10 +56,14 @@ const GameList = () => {
   }, []);
 
   return (
-    <>
+    <> 
+      <section className="game-list">
       <Header title='Game List' />
-      <Container style={{paddingTop:'50px'}}>
-        <Button style={{marginBottom:'50px'}} onClick={tambahGame}>
+      <Container>
+          <Button
+            color="warning"
+            style={{ marginBottom: '10px' }}
+            onClick={tambahGame}>
           Tambah
         </Button>
         <Row>
@@ -68,17 +72,16 @@ const GameList = () => {
               return (
                 <Col key={game.key} sm="6">
                   {/* {console.log(game.game_url, '==> handleGame')} */}
-                  <Card body>
-                    <CardTitle tag="h5">{game.name}</CardTitle>
-                    <CardText>{game.description}</CardText>
+                  <Card body style={{ marginBottom: "5px" }}>
+                    <CardTitle tag="h5">Game : {game.name.toUpperCase()}</CardTitle>
+                    <CardText><p>Game Description : {game.description.toUpperCase()}</p></CardText>
 
-                    <CardText>{game.play_count}</CardText>
+                    <CardText><p>Play Count : {game.play_count}</p></CardText>
                     <Button
                         color="primary"
                         onClick={(e) => {
                             e.preventDefault()
                             router.push(`/${game.game_url ? game.game_url : ""}`)}}
-              
                     >
                         Play Game
                     </Button>
@@ -88,6 +91,7 @@ const GameList = () => {
             })}
         </Row>
       </Container>
+      </section>
     </>
   );
 };

@@ -3,6 +3,13 @@ import Header from '../header';
 import { Button } from 'reactstrap';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
+import Link from 'next/link';
+
+const aStyle = {
+      textDecoration: "none",
+      color: "black",
+    }
+  
 
 export default function LandingPageComponent() {
 
@@ -16,7 +23,9 @@ export default function LandingPageComponent() {
             <h3>Experience New Traditional Game Play</h3>
             <div>
               <Button color="warning" size="lg">
-                PLAY NOW
+                <Link href="/played-dummy">
+                <a style={aStyle}>PLAY NOW</a>
+                </Link>
               </Button>
             </div>
           </div>

@@ -26,6 +26,9 @@
       justify-content: center;
       // box-sizing: border-box;
       // overflow: auto
+      span{
+        text-transform:capitalize ;
+      }
     }
     .btn{
         padding: 15px 40px;      
