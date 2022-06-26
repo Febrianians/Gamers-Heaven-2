@@ -3,6 +3,7 @@ import { auth, db, storage } from "../services/firebase";
 import { ref, set } from "firebase/database";
 import { v4 as uuidv4 } from "uuid";
 import { Container, Form, FormGroup, Label, Input, Button } from "reactstrap";
+import Header from "../components/headerLogin";
 // import { useNavigate } from "react-router-dom";ls
 
 const GameForm = () => {
@@ -33,7 +34,8 @@ const GameForm = () => {
   };
 
   return (
-    <Container>
+    <section>
+      <Header title='Add New Game'/>
       <Form onSubmit={handleSubmit}>
         <FormGroup>
           <Label for="name">Game name</Label>
@@ -69,7 +71,7 @@ const GameForm = () => {
           Save
         </Button>
       </Form>
-    </Container>
+    </section>
   );
 };
 

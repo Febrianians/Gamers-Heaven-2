@@ -5,6 +5,7 @@ import { auth, db } from "../../services/firebase";
 import { getDatabase, ref, get, child, onValue } from "firebase/database";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useState } from "react";
+import { useRouter } from "next/router";
 import Link from "next/link";
 
 
@@ -12,7 +13,7 @@ export default function HomePageComponent() {
 
     const [user, loading] = useAuthState(auth);
     const [userData, setUserData] = useState({})
-
+    const router = useRouter()
     function fetchUserdata() {
           
 
@@ -32,6 +33,12 @@ export default function HomePageComponent() {
       }
     
       useEffect(() => {
+        let token = sessionStorage.getItem('token')
+        if (!token) {
+          alert('hehehhe')
+          router.push('/')
+      return
+    }
         if (loading) return;
         fetchUserdata();
       }, []);
@@ -43,7 +50,7 @@ export default function HomePageComponent() {
       <Header title='Home Page' />
         <div className="wrapper">
           <div className='bodySection'>
-            <h1>Welcome {userData ? userData.username : ""} the Home Page</h1>
+            <h1>Welcome <span>{userData ? userData.username : ""} </span>To Home Page</h1>
           </div>
           <div>
             <Link href="/game-list">

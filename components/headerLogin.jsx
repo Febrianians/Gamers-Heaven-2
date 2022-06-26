@@ -48,13 +48,14 @@ export default function Header(props) {
                     <Link href="/" >{props.title}</Link>
                 </div>
                 <NavbarToggler  onClick={handleToggle} />
-                <Collapse isOpen = {isOpen ? isOpen : ""} navbar>
-                    <Nav 
-                    className="ms-4 "
+                <Collapse isOpen={isOpen ? isOpen : ""} navbar
+                className='ms-5'>
+                <Nav 
                     navbar
                     >
+                    <Nav>
                     <NavItem className={router.pathname == "/home-page" ? "active" : "navitem"}>
-                        <Link href="/home-page" >
+                        <Link href={username ? "/home-page" : "/"} >
                         <a className='text-link'>HOME</a>
                         </Link>
                     </NavItem>
@@ -65,14 +66,12 @@ export default function Header(props) {
                     </NavItem>
                     </Nav>
                     {
-                        username ? 
+                    username ? 
                         <>
-                         <Nav 
-                        >
+                        <Nav>
                             <NavItem className='navitem'>
                                 <a className='text-link' style={{ cursor: 'pointer' }}>TOTAL SCORE = {totalScore ? totalScore : 0}</a>
                             </NavItem>
-                       
                             <NavItem className={router.pathname == "/profile-page" ? "active" : "navitem"}>
                                 <Link className='navlink' href='/profile-page'>
                                 <a className='text-link'>{username.toUpperCase()}</a>
@@ -85,8 +84,23 @@ export default function Header(props) {
                             </NavItem>
                         </Nav>
                         </>
-                            : ''
-                        }
+                            :
+                            <>
+                                <Nav>
+                                <NavItem className={router.pathname == "/register-page" ? "active" : "navitem"}>
+                                    <Link className='navlink' href='/register-page'>
+                                    <a className='text-link'>REGISTER</a>
+                                    </Link>
+                                </NavItem>
+                                <NavItem className={router.pathname == "/login-page" ? "active" : "navitem"}>
+                                    <Link className='navlink' href="/login-page">
+                                    <a className='text-link'>LOGIN</a>
+                                    </Link>
+                                </NavItem>
+                                </Nav>
+                            </>
+                    }
+                    </Nav>
                 </Collapse>
             </Navbar>
         </div>
