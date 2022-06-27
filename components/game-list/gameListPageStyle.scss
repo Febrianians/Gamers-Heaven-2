@@ -2,10 +2,12 @@
     background: url('../../public//assets//img/requirements.png');
     background-position: center;
     background-size: cover;
+    height: 100vh;
 
 
-    .card{
+    .card-game{
         border-radius: 8px;
         background-color: rgba(255, 255, 255, 0.688);
+        margin-bottom: 25px;
     }
 }

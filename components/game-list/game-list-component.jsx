@@ -72,11 +72,11 @@ const GameList = () => {
               return (
                 <Col key={game.key} sm="6">
                   {/* {console.log(game.game_url, '==> handleGame')} */}
-                  <Card body style={{ marginBottom: "5px" }}>
+                  <Card body className="card-game">
                     <CardTitle tag="h5">Game : {game.name.toUpperCase()}</CardTitle>
-                    <CardText><p>Game Description : {game.description.toUpperCase()}</p></CardText>
+                    <CardText>Game Description : {game.description.toUpperCase()}</CardText>
 
-                    <CardText><p>Play Count : {game.play_count}</p></CardText>
+                    <CardText>Play Count : {game.play_count}</CardText>
                     <Button
                         color="primary"
                         onClick={(e) => {
