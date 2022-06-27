@@ -3,6 +3,8 @@ import VideoIntegrationComponent from "../components/video-integration/video-int
 export default function VideoIntegration() {
 
     return(
-        <VideoIntegrationComponent />
+        <>
+            <VideoIntegrationComponent />
+        </>
     )
 }
