@@ -11,9 +11,13 @@ import '../components/register-page/registerPageStyle.scss'
 import '../components/game-list/gameListPageStyle.scss'
 import { nextStore, store } from '../redux/index'
 import { Provider } from 'react-redux'
+import {useEffect} from "react"
 
 
 function MyApp({ Component, pageProps }) {
+  useEffect(() => {
+    import("bootstrap/dist/js/bootstrap");
+  }, []);
   return(
     <>
       <Provider store={store}>
