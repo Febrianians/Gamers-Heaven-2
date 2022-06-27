@@ -7,6 +7,9 @@ import { useRouter } from 'next/router'
 import { useSelector } from 'react-redux'
 import { getAuth, signOut } from "firebase/auth";
 import Link from 'next/link';
+import Image from 'next/image'
+import fox from "../public/assets/img/fox.jpg"
+
 
 
 export default function Header(props) {
@@ -81,6 +84,39 @@ export default function Header(props) {
                                 <Link href="/" style={{cursor: "pointer"}}  className='navlink'>
                                 <a className='text-link'>LOGOUT</a>
                                 </Link>
+                            </NavItem>
+                            <NavItem>
+                            <div className="dropdown">
+                                <button
+                                className="btn dropdown-toggle"
+                                type="button"
+                                data-bs-toggle="dropdown"
+                                >
+                                <Image src={fox} width="20" height="20" alt="dropdown image" class="rounded-circle"/>
+                                </button>
+                                <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    <li>
+                                        <a className="dropdown-item" href="#">
+                                        profile-page
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a className="dropdown-item" href="#">
+                                        update-profile
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <Link className='navlink' href='/profile-page'>
+                                             <a className='dropdown-item'>{username.toUpperCase()}</a>
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/" className='navlink'>
+                                             <a className='dropdown-item'>LOGOUT</a>
+                                        </Link>
+                                    </li>
+                                </ul>
+                             </div>
                             </NavItem>
                         </Nav>
                         </>
