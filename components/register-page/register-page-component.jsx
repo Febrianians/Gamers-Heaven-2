@@ -14,7 +14,8 @@ export default function RegisterPageComponent() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
-  const [gameChoice, setGameChoice] = useState("")
+  const [gameChoice, setGameChoice] = useState("21c39cc6-289b-47c4-879d-d52e47f8d7b8")
+  const [gameName, setGameName] = useState("Rock Paper Scissor")
   const [totalScore, setTotalScore] = useState("");
   const [bio, setBio] = useState("");
   const [city, setCity] = useState("");
@@ -29,25 +30,25 @@ export default function RegisterPageComponent() {
       if (user) alert("Register Success");
       console.log(user, "=====> ini user");
       await updateProfile(user, {displayName : username})
-      
-      // router.push('/login-page')
+      router.push('/login-page')
       console.log(gameChoice, "====> ini game choice");
-      set(ref(db, `users/${user.displayName}`),
+      await set(ref(db, `users/` + user.displayName),
       //  {[]
       //   email: email,
       //   username: username,
       //   game: gameChoice
       // });
       {
-        displayName : {
-          id_user : {
-              username : username,
-               game : {
-          id_game : gameChoice,
-        }
+        email : email, 
+        username : username, 
+        game : {
+          game_id : gameChoice,
+          game_name : gameName,
+          play_count : 0,
+          score : 0
           }
-        }
-      })
+        })
+      
     } catch (err) {
       console.error(err);
       alert(err.message);
@@ -124,7 +125,7 @@ export default function RegisterPageComponent() {
                         </div>
                         <div>
                           <h3>Select Games</h3>
-                          <Input type="select"  onChange={(e) => {setGameChoice(e.target.value)}} name="select" id="exampleSelect">
+                          <Input type="select"  value={"21c39cc6-289b-47c4-879d-d52e47f8d7b8"} onChange={(e) => {setGameChoice(e.target.value)}} name="select" id="exampleSelect">
                           {gameList && gameList.map((game)=>{
                             return(
                               <option value={game.key} key={game.key} >{game.description.toUpperCase()}</option>

@@ -7,6 +7,9 @@ import { useRouter } from 'next/router'
 import Link from "next/link";
 export default function LeaderboardPageComponent(){
     
+    const [numpangData, setNumpangData] = useState([])
+
+
     function fetchDataFromDB(){
         const dbRef = ref(db, 'users');
 
@@ -15,9 +18,20 @@ export default function LeaderboardPageComponent(){
         snapshot.forEach((childSnapshot) => {
             const childKey = childSnapshot.key;
             const childData = childSnapshot.val();
-            console.log(childKey, "====> ini child key");
-            console.log(childData, "====> ini child key");
+            console.log(childKey, "====> ini ChdildKey");
+            // console.log(childData, "====> ini ChildData");
+            getData.push({
+                username : childData.username,
+                gameName : childData.game.game_name,
+                gameScore : childData.game.play_count
             })
+        })
+        setNumpangData(getData)
+        console.log(numpangData, "===> ini numpang data");
+
+        
+
+
         })
         , {
             onlyOnce: true
@@ -33,7 +47,29 @@ export default function LeaderboardPageComponent(){
         <>
         <section className="leaderborad-page">
             <Header title="Leaderboard Page"/>
-            <h1>Test</h1>
+            <h1>ROCK PAPER SCISSORS</h1>
+            {
+                numpangData.map((data)=>{
+                    return(
+                        <table>
+                            <tr>
+                                <th>Nama</th>
+                                {data.username}
+                            </tr>
+                            <tr>
+                                <td>Alfreds Futterkiste</td>
+                                <td>Maria Anders</td>
+                                <td>Germany</td>
+                            </tr>
+                            <tr>
+                                <td>Centro comercial Moctezuma</td>
+                                <td>Francisco Chang</td>
+                                <td>Mexico</td>
+                            </tr>
+                        </table>
+                    )
+                })
+            }
         </section>
         </>
     )
