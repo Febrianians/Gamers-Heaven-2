@@ -1,20 +1,25 @@
 import { useState } from "react";
+import { Input } from "reactstrap";
 import Header from "../header"
 import { auth, db } from "../../services/firebase";
-import { ref, set } from "firebase/database";
+import { ref, set, onValue } from "firebase/database";
+
 import { useRouter } from 'next/router'
 import Link from "next/link";
 
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { useEffect } from "react";
 
 export default function RegisterPageComponent() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
+  const [gameChoice, setGameChoice] = useState("")
   const [totalScore, setTotalScore] = useState("");
   const [bio, setBio] = useState("");
   const [city, setCity] = useState("");
   const [socialMediaUrl, setSocialMediaUrl] = useState("");
+  const [gameList, setGameList] = useState([]);
   const router = useRouter()
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,22 +27,60 @@ export default function RegisterPageComponent() {
       const res = await createUserWithEmailAndPassword(auth, email, password);
       const user = res.user;
       if (user) alert("Register Success");
-      router.push('/login-page')
-
-      set(ref(db, `users/${user.uid}`), {
-        email: email,
-        username: username,
-        total_score: totalScore,
-        bio: bio,
-        city: city,
-        socialMediaUrl,
-      });
+      console.log(user, "=====> ini user");
+      await updateProfile(user, {displayName : username})
+      
+      // router.push('/login-page')
+      console.log(gameChoice, "====> ini game choice");
+      set(ref(db, `users/${user.displayName}`),
+      //  {[]
+      //   email: email,
+      //   username: username,
+      //   game: gameChoice
+      // });
+      {
+        displayName : {
+          id_user : {
+              username : username,
+               game : {
+          id_game : gameChoice,
+        }
+          }
+        }
+      })
     } catch (err) {
       console.error(err);
       alert(err.message);
     }
     console.log(email, password);
   };
+
+
+  useEffect(() => {
+    onValue(
+      ref(db, "games"),
+      (snapshot) => {
+        const newGames = [];
+        snapshot.forEach((childSnapshot) => {
+          const childKey = childSnapshot.key;
+          const childData = childSnapshot.val();
+            // console.log(childKey, childData, '==> key & data game-list');
+          newGames.push({
+            key: childKey,
+            name: childData.name,
+            game_url: childData.game_url,
+            description: childData.description,
+            play_count: childData.play_count
+          });
+        });
+        setGameList(newGames);
+        console.log(gameList, '==> game list')
+      },
+      {
+        onlyOnce: true,
+      }
+    );
+  }, []);
   return (
     <>
       <section className="register-section">
@@ -79,45 +122,15 @@ export default function RegisterPageComponent() {
                             placeholder="Username"
                             />
                         </div>
-                        <div className="form-group text-left col-3">
-                            <label htmlFor="exampleInputTotalScore">Total Score</label>
-                            <input
-                            type="number"
-                            onChange={(e) => setTotalScore(e.target.value)}
-                            className="form-control"
-                            id="totalscore"
-                            placeholder="0"
-                            />
-                        </div>
-                        <div className="form-group text-left col-9">
-                            <label htmlFor="exampleInputCity">Social Media Url</label>
-                            <input
-                            type="text"
-                            onChange={(e) => setSocialMediaUrl(e.target.value)}
-                            className="form-control"
-                            id="socialmediaurl"
-                            placeholder="@instagram"
-                            />
-                        </div>
-                        <div className="form-group text-left">
-                            <label htmlFor="exampleInputCity">City</label>
-                            <input
-                            type="text"
-                            onChange={(e) => setCity(e.target.value)}
-                            className="form-control"
-                            id="city"
-                            placeholder="City, Apartment, Address"
-                            />
-                        </div>
-                        <div className="form-group text-left">
-                            <label htmlFor="exampleInputBio">Bio</label>
-                            <input
-                            type="text"
-                            onChange={(e) => setBio(e.target.value)}
-                            className="form-control"
-                            id="bio"
-                            placeholder="Bio"
-                            />
+                        <div>
+                          <h3>Select Games</h3>
+                          <Input type="select"  onChange={(e) => {setGameChoice(e.target.value)}} name="select" id="exampleSelect">
+                          {gameList && gameList.map((game)=>{
+                            return(
+                              <option value={game.key} key={game.key} >{game.description.toUpperCase()}</option>
+                            )
+                          })}
+                        </Input>
                         </div>
                         <p>Already have an account ?  <span>
                             <Link href="/login-page" >Login
