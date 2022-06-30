@@ -33,11 +33,11 @@ export default function RegisterPageComponent() {
       router.push('/login-page')
       console.log(gameChoice, "====> ini game choice");
       await set(ref(db, `users/` + user.displayName),
-      //  {[]
-      //   email: email,
-      //   username: username,
-      //   game: gameChoice
-      // });
+        //  {[]
+        //   email: email,
+        //   username: username,
+        //   game: gameChoice
+        // });
       {
         email : email, 
         username : username, 

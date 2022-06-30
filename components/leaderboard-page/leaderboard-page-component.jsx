@@ -28,8 +28,12 @@ export default function LeaderboardPageComponent(){
         })
         setNumpangData(getData)
         console.log(numpangData, "===> ini numpang data");
-
+        numpangData.forEach((game)=>{
+            console.log(game);
+        })
         
+
+       
 
 
         })
@@ -49,26 +53,29 @@ export default function LeaderboardPageComponent(){
             <Header title="Leaderboard Page"/>
             <h1>ROCK PAPER SCISSORS</h1>
             {
-                numpangData.map((data)=>{
-                    return(
-                        <table>
-                            <tr>
-                                <th>Nama</th>
-                                {data.username}
-                            </tr>
-                            <tr>
-                                <td>Alfreds Futterkiste</td>
-                                <td>Maria Anders</td>
-                                <td>Germany</td>
-                            </tr>
-                            <tr>
-                                <td>Centro comercial Moctezuma</td>
-                                <td>Francisco Chang</td>
-                                <td>Mexico</td>
-                            </tr>
-                        </table>
-                    )
-                })
+                // numpangData.map((data)=>{
+                    
+                    
+                    
+                //     return(
+                //         <table>
+                //             <tr>
+                //                 <th>Nama</th>
+                //                 {data.username}
+                //             </tr>
+                //             <tr>
+                //                 <td>Alfreds Futterkiste</td>
+                //                 <td>Maria Anders</td>
+                //                 <td>Germany</td>
+                //             </tr>
+                //             <tr>
+                //                 <td>Centro comercial Moctezuma</td>
+                //                 <td>Francisco Chang</td>
+                //                 <td>Mexico</td>
+                //             </tr>
+                //         </table>
+                //     )
+                // })
             }
         </section>
         </>
