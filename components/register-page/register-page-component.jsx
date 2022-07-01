@@ -30,7 +30,7 @@ export default function RegisterPageComponent() {
       if (user) alert("Register Success");
       console.log(user, "=====> ini user");
       await updateProfile(user, {displayName : username})
-      router.push('/login-page')
+      // router.push('/login-page')
       console.log(gameChoice, "====> ini game choice");
       await set(ref(db, `users/` + user.displayName),
         //  {[]
@@ -41,12 +41,12 @@ export default function RegisterPageComponent() {
       {
         email : email, 
         username : username, 
-        game : {
+        game_id : {
           game_id : gameChoice,
           game_name : gameName,
           play_count : 0,
           score : 0
-          }
+          },
         })
       
     } catch (err) {
@@ -71,7 +71,9 @@ export default function RegisterPageComponent() {
             name: childData.name,
             game_url: childData.game_url,
             description: childData.description,
-            play_count: childData.play_count
+            play_count: childData.play_count,
+            created_at: Date.now(),
+            updated_at: Date.now()
           });
         });
         setGameList(newGames);

@@ -121,7 +121,12 @@ export default function Header(props) {
                         </Nav>
                         </>
                             :
-                            <>
+                            <>   
+                                <NavItem className={router.pathname == "/leaderboard-page" ? "active" : "navitem"}>
+                                    <Link href="/leaderboard-page">
+                                    <a className='text-link'>LEADERBOARD PAGE</a>
+                                    </Link>
+                                </NavItem>
                                 <Nav>
                                 <NavItem className={router.pathname == "/register-page" ? "active" : "navitem"}>
                                     <Link className='navlink' href='/register-page'>

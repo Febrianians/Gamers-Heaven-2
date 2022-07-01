@@ -4,6 +4,7 @@ import Header from "../header"
 import { auth, db } from "../../services/firebase";
 import { ref, set, onValue, get } from "firebase/database";
 import { useAuthState } from "react-firebase-hooks/auth"
+import { Container, Row, Col, Table } from 'reactstrap';
 import { useRouter } from 'next/router'
 import Link from "next/link";
 import { list } from 'firebase/storage';
@@ -14,30 +15,12 @@ export default function LeaderboardPageComponent(){
 
     function fetchDataFromDB(){
         const dbRef = ref(db, 'users')
-        // })
-        // console.log("====> masuk sini");
-        // get(dbRef)
-        // .then((snapshot)=>{
-        //     if (snapshot) {
-        //         // console.log(snapshot.val(), "====> ini data s");
-        //         let dataUser = snapshot.val()
-        //     }})
-            
-
-
-        // console.log(get(), "==> ini get");
         onValue(dbRef, (snapshot) => {
             let list = Object.entries(snapshot.val()).map(([key, value], index) => {
                 return value
             })
-            // Object.entries(snapshot.val()).forEach(([key, value], index) => {
-            //     console.log(value, "-----> value")
-            //     auw.push(value)
-            // })     
-
-            setNumpangData(list)
-            // console.log(numpangData)    
-
+            setNumpangData(list)  
+            console.log(list[0].game, "===> ini list lenght");
 
             // let getData = []
             // snapshot.forEach((childSnapshot) => {
@@ -61,60 +44,60 @@ export default function LeaderboardPageComponent(){
     }
 
     useEffect(()=>{
-        if(loading)return;
         fetchDataFromDB()
+        if(loading)return;
     },[])
        
         
-        let textCenter = {
-            textAlign: "center",
-            color: "white"
-        }
+       
         return(
             <>
-            <section className="leaderborad-page">
-            {/* <Header title="Leaderboard Page"/> */}
-
-            <div className="container">
-            <h1 style={textCenter}>ROCK PAPER SCISSORS</h1>
-                <div className="row">
-                    <div className="col-lg-12">
-                    <table>         
-                    <tr style={{width: "100%"}}>  
-                    <tr className='keyData'>
+            <section className="leaderboard-page">
+            <Header title="Leaderboard Page"/>
+            <Container>
+                <Row>
+                <h1>ROCK PAPER SCISSORS</h1>
+                    <Col>
+                    <Table hover>
+                    <thead>
+                    <tr>
                         <th>USER</th>
                         <th>Play Count</th>
                         <th>Score</th>
                     </tr>
+                    </thead>
             {
                 numpangData.map(value =>{
                     let userName = value.username
                     let playCount =value.game.play_count
                     let score =value.game.score
-                    console.log(value.game.score, "===> oi oi");
+                    let gameId = value.game.game_id
+                    let gameUsername = value.username
+                    let gameEmail = value.email
+                    console.log(value, "===> oi oi");
                     return(
-                        <>
-                        <tr className='valueData'>
-                        <td>
+
+                        <tbody>
+                        <tr>
+                        <td key={gameId}>
                             {userName}
                         </td>
-                        <td>
+                        <td key={gameUsername}>
                             {playCount}
                         </td>
-                        <td>
+                        <td key={gameEmail}>
                             {score}
                         </td>
                         </tr>
+                        </tbody>
                         
-                        </>
                     )
                 })
             }
-                    </tr>
-                    </table>
-                    </div>
-                </div>
-            </div>
+                    </Table>
+                    </Col>
+                </Row>
+            </Container>
             </section>
             </>
         )

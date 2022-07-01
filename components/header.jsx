@@ -63,9 +63,14 @@ export default function Header(props) {
                         <a className='text-link'>HOME</a>
                         </Link>
                     </NavItem>
-                    <NavItem className='navitem'>
+                    <NavItem className={router.pathname == "/game-list" ? "active" : "navitem"}>
                         <Link href="/game-list">
                         <a className='text-link'>LIST GAME</a>
+                        </Link>
+                    </NavItem>
+                    <NavItem className={router.pathname == "/leaderboard-page" ? "active" : "navitem"}>
+                        <Link href="/leaderboard-page">
+                        <a className='text-link'>LEADERBOARD PAGE</a>
                         </Link>
                     </NavItem>
                     {/* <NavItem className='navitem'>
