@@ -9,6 +9,7 @@ import '../components/error-page/errorPageStyle.scss'
 import '../components/login-page/loginPageStyle.scss'
 import '../components/register-page/registerPageStyle.scss'
 import '../components/game-list/gameListPageStyle.scss'
+import '../components/leaderboard-page/leaderboardPageStyle.scss'
 import { nextStore, store } from '../redux/index'
 import { Provider } from 'react-redux'
 import {useEffect} from "react"

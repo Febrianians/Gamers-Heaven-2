@@ -1,0 +1,29 @@
+.leaderborad-page{
+    background: url('../../public//assets//img/main-bg-figma.jpg');
+    background-size: cover;
+    background-position: center;
+    width: 100vw;
+    height: 100vh;
+    table{
+        display: flex;
+        justify-content: center;
+        color: white;
+        font-size: 30px;
+        height: 500px;
+        width: 100%;
+        background-color: #f2d492;
+        border-radius: 8px;
+        th{
+            padding: 20px;
+        }
+        td{
+            padding: 20px;
+        }
+    .keyData{
+        text-align: center;
+    }
+    .valueData{
+        text-align: center;
+    }
+    }
+}
