@@ -6,7 +6,7 @@ class Testing{
         const {email, password} = req.body
             try {
                 const response = await signInWithEmailAndPassword(auth, email, password)
-                console.log(response);
+                console.log(response, "===> ini response");
                 res.status(200)
             } catch (error) {
                 res.status(400)
