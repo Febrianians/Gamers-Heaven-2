@@ -37,10 +37,10 @@ export default function HomePageComponent() {
         if (!token) {
           alert('hehehhe')
           router.push('/')
-      return
-    }
-        if (loading) return;
+      // return
+    } else
         fetchUserdata();
+        if (loading) return;
       }, []);
 
 

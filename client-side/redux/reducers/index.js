@@ -1,7 +1,8 @@
 
 const initialState = {
     username: '',
-    total_score: null
+    total_score: null,
+    userName: 'testing go'
 
 }
 
@@ -14,6 +15,9 @@ export default function reducers(state = initialState, action) {
         case 'SET_SCORE':
             console.log(action.payload, '==> payload SCORE');
             return { ...state, total_score:action.payload}
+        case 'USER_LOGOUT':
+            console.log(action.payload, 'payload logout')
+            return {...state, userName: action.payload}
         default:
         return state;
     }

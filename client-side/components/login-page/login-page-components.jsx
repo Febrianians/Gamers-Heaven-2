@@ -33,7 +33,7 @@ export default function LoginPageComponent(props) {
 
                 sessionStorage.setItem('token', token)
 
-                let uid = response.user.uid
+                let uid = response.user.displayName
                 console.log(uid, '===> uid ini ');
                 dispatch(setToken(uid))
                 router.push('/home-page')

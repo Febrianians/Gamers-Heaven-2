@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useState } from "react";
 import Header from "../header"
+import HeaderLogin from '../headerLogin'
 import { auth, db } from "../../services/firebase";
 import { ref, set, onValue, get } from "firebase/database";
 import { useAuthState } from "react-firebase-hooks/auth"
@@ -56,7 +57,9 @@ export default function LeaderboardPageComponent(){
         return(
             <>
             <section className="leaderboard-page">
-            <Header title="Leaderboard Page"/>
+            {
+                user ? <HeaderLogin title = "Leaderboard Page"/> : <Header title ="Leaderboard Page"/>
+            }
             <Container>
                 <Row>
                 <h1>ROCK PAPER SCISSORS</h1>

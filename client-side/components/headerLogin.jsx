@@ -30,14 +30,16 @@ export default function Header(props) {
 
     const logoutBtn = (e) => {
         e.preventDefault();
-    const auth = getAuth();
-    signOut(auth).then(() => {
-    sessionStorage.removeItem('token')
-    }).catch((error) => {
-        console.log(error.message, '====> dari logout');
-    });
-    console.log('User signed out!');
-    // router.push('/')
+        // const logout = useSelector(state => state.userName)
+        const auth = getAuth();
+        signOut(auth).then(() => {
+        sessionStorage.removeItem('token')
+        logout()
+        }).catch((error) => {
+            console.log(error.message, '====> dari logout');
+        });
+        console.log('User signed out!');
+        // router.push('/')
     }
     return(
         <div>
@@ -53,10 +55,7 @@ export default function Header(props) {
                 <NavbarToggler  onClick={handleToggle} />
                 <Collapse isOpen={isOpen ? isOpen : ""} navbar
                 className='ms-5'>
-                <Nav 
-                    navbar
-                    >
-                    <Nav>
+                <nav className="navbarUser">
                     <NavItem className={router.pathname == "/home-page" ? "active" : "navitem"}>
                         <Link href={username ? "/home-page" : "/"} >
                         <a className='text-link'>HOME</a>
@@ -67,13 +66,14 @@ export default function Header(props) {
                         <a className='text-link'>LIST GAME</a>
                         </Link>
                     </NavItem>
-                    </Nav>
                     {
                     username ? 
                         <>
-                        <Nav>
-                            <NavItem className='navitem'>
+                            <nav className="navbarUser">
+                            <NavItem className={router.pathname == "/leaderboard-page" ? "active" : "navitem"}>
+                                <Link className='navlink' href='/leaderboard-page'>
                                 <a className='text-link' style={{ cursor: 'pointer' }}>TOTAL SCORE = {totalScore ? totalScore : 0}</a>
+                                </Link>
                             </NavItem>
                             <NavItem className={router.pathname == "/profile-page" ? "active" : "navitem"}>
                                 <Link className='navlink' href='/profile-page'>
@@ -85,6 +85,8 @@ export default function Header(props) {
                                 <a className='text-link'>LOGOUT</a>
                                 </Link>
                             </NavItem>
+
+
                             <NavItem>
                             <div className="dropdown">
                                 <button
@@ -92,7 +94,7 @@ export default function Header(props) {
                                 type="button"
                                 data-bs-toggle="dropdown"
                                 >
-                                <Image src={fox} width="20" height="20" alt="dropdown image" class="rounded-circle"/>
+                                <Image src={fox} width="20" height="20" alt="dropdown image" className="rounded-circle"/>
                                 </button>
                                 <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                     <li>
@@ -118,7 +120,7 @@ export default function Header(props) {
                                 </ul>
                              </div>
                             </NavItem>
-                        </Nav>
+                            </nav>
                         </>
                             :
                             <>   
@@ -127,7 +129,7 @@ export default function Header(props) {
                                     <a className='text-link'>LEADERBOARD PAGE</a>
                                     </Link>
                                 </NavItem>
-                                <Nav>
+
                                 <NavItem className={router.pathname == "/register-page" ? "active" : "navitem"}>
                                     <Link className='navlink' href='/register-page'>
                                     <a className='text-link'>REGISTER</a>
@@ -138,10 +140,10 @@ export default function Header(props) {
                                     <a className='text-link'>LOGIN</a>
                                     </Link>
                                 </NavItem>
-                                </Nav>
+
                             </>
                     }
-                    </Nav>
+                    </nav>
                 </Collapse>
             </Navbar>
         </div>
