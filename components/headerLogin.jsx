@@ -75,16 +75,6 @@ export default function Header(props) {
                             <NavItem className='navitem'>
                                 <a className='text-link' style={{ cursor: 'pointer' }}>TOTAL SCORE = {totalScore ? totalScore : 0}</a>
                             </NavItem>
-                            <NavItem className={router.pathname == "/profile-page" ? "active" : "navitem"}>
-                                <Link className='navlink' href='/profile-page'>
-                                <a className='text-link'>{username.toUpperCase()}</a>
-                                </Link>
-                            </NavItem>
-                            <NavItem onClick={logoutBtn} className='navitem'>
-                                <Link href="/" style={{cursor: "pointer"}}  className='navlink'>
-                                <a className='text-link'>LOGOUT</a>
-                                </Link>
-                            </NavItem>
                             <NavItem>
                             <div className="dropdown">
                                 <button
@@ -92,25 +82,32 @@ export default function Header(props) {
                                 type="button"
                                 data-bs-toggle="dropdown"
                                 >
-                                <Image src={fox} width="20" height="20" alt="dropdown image" class="rounded-circle"/>
+                                <Image src="https://res.cloudinary.com/dnneax9ui/image/upload/v1656404900/cld-sample-5.jpg" width="20" height="20" alt="dropdown image" class="rounded-circle"/>
                                 </button>
                                 <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                    <li>
-                                        <a className="dropdown-item" href="#">
-                                        profile-page
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a className="dropdown-item" href="#">
-                                        update-profile
-                                        </a>
-                                    </li>
-                                    <li>
+                                    <li className={router.pathname == "/profile-page" ? "active" : "navitem"}>
                                         <Link className='navlink' href='/profile-page'>
                                              <a className='dropdown-item'>{username.toUpperCase()}</a>
                                         </Link>
                                     </li>
+                                    
                                     <li>
+                                    <Link className='navlink' href='/profile-page'>
+                                    <a className="dropdown-item">
+                                        Profile Page
+                                        </a>
+                                        </Link>
+                                        
+                                    </li>
+                                    <li>
+                                    <Link className='navlink' href='/profile-page-update'>
+                                    <a className="dropdown-item">
+                                        Update Profile Page
+                                        </a>
+                                        </Link>
+                                    </li>
+                                    
+                                    <li onClick={logoutBtn}>
                                         <Link href="/" className='navlink'>
                                              <a className='dropdown-item'>LOGOUT</a>
                                         </Link>
