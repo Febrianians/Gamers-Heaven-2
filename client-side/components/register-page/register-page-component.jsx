@@ -24,6 +24,8 @@ export default function RegisterPageComponent() {
   const [gameList, setGameList] = useState([]);
   const [imageSrc, setImageSrc] = useState();
   const [uploadData, setUploadData] = useState();
+  const [isNext,setIsNext] = useState(false);
+  const [isPhoto,setIsPhoto] = useState(false)
   const router = useRouter()
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -70,6 +72,7 @@ export default function RegisterPageComponent() {
 
   function handleOnChange(changeEvent) {
     const reader = new FileReader();
+    setIsPhoto(true)
 
     reader.onload = function(onLoadEvent) {
       setImageSrc(onLoadEvent.target.result);
@@ -100,6 +103,77 @@ export default function RegisterPageComponent() {
 setImageSrc(data.secure_url)
 
 console.log("data", data);
+    }
+
+    async function handleSubmitTesting(event){
+      try {
+      console.log(isPhoto, "===> ini foto" );
+        if(isPhoto){
+        event.preventDefault();
+        const form = event.currentTarget;
+        const fileInput = Array.from(form.elements).find(({ name }) => name === 'file')
+
+
+        const formData = new FormData();
+
+        for (const file of fileInput.files){
+          formData.append('file', file)
+        }
+
+          formData.append('upload_preset', 'demo-image')
+          const data = await fetch('https://api.cloudinary.com/v1_1/dnneax9ui/image/upload',{
+                method: 'POST',
+                body: formData
+        }).then(r => r.json());
+
+        setImageSrc(data.secure_url)
+
+        console.log("data", data);
+        const responseCreateUser = await createUserWithEmailAndPassword(auth, email, password);
+        const user = responseCreateUser.user;
+        if (user) alert("Register Success");
+        console.log(user, "=====> ini user");
+        await updateProfile(user, {displayName : username,photoURL : data.secure_url })
+        // router.push('/login-page')
+        console.log(gameChoice, "====> ini game choice");
+  
+        let today = new Date()
+  
+        let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+  
+        let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+  
+        let dateTime = date+' '+time;
+        await set(ref(db, `users/` + user.displayName),
+            //  {[]
+            //   email: email,
+            //   username: username,
+            //   game: gameChoice
+            // });
+          {
+            email : email, 
+            username : username, 
+            game_id : {
+              game_id : gameChoice,
+              game_name : gameName,
+              play_count : 0,
+              score : 0
+            },
+            created_at : dateTime
+          })
+        setIsNext(true)
+      }else{
+        alert("No Photo Selected")
+      }
+      
+        
+        
+        
+        
+      } catch (err) {
+        console.error(err);
+        alert(err.message);
+      }
     }
 
 
@@ -136,7 +210,7 @@ console.log("data", data);
         <Header title="Register" />
             <div className="container">
                     <div className="card login-card">
-                        <form onSubmit={handleSubmit} className="row" >
+                        <form onSubmit={handleSubmitTesting} className="row" >
                         <div className="form-group col-6 text-left">
                             <label htmlFor="exampleInputEmail1">Email address</label>
                             <input
@@ -216,27 +290,12 @@ console.log("data", data);
                         </span>
                         </p>
                         </div>
-                        {/* {imageSrc && !uploadData  && (
                         <button
                               type="submit"
                               className="btn btn-warning">
                             Register
                         </button>
-                        )} */}
-                        {/* {if(imageSrc && !uploadData){
-                          <>
-                          <button
-                          type="submit"
-                          className="btn btn-warning">
-                        Register
-                          </button>
-                          
-                          </>
-                        }} */}
                         </form>
-                        <form className={styles.form}  onSubmit={handleOnSubmit2}>
-                              
-                       </form>
                     </div>
             </div>
       </section>
