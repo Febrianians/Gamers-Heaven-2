@@ -223,7 +223,7 @@ console.log("data", data);
                             Register
                         </button>
                         )} */}
-                        {if(imageSrc && !uploadData){
+                        {/* {if(imageSrc && !uploadData){
                           <>
                           <button
                           type="submit"
@@ -232,7 +232,7 @@ console.log("data", data);
                           </button>
                           
                           </>
-                        }}
+                        }} */}
                         </form>
                         <form className={styles.form}  onSubmit={handleOnSubmit2}>
                               
